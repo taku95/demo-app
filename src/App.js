@@ -4,7 +4,7 @@ import Items from "./components/Items";
 export default function MyApp() {
   return (
     <div>
-      <Button variant="contained">Hello World</Button>
+      {/* <Button variant="contained">Hello World</Button> */}
       <Items></Items>
     </div>
   );
