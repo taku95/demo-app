@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
+    "no-unused-vars": "off",
     indent: ["error", 2],
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
