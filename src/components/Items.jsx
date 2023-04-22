@@ -5,7 +5,8 @@ const Items = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const appid = "dj00aiZpPVFCRDBxZ2t3VFdTdSZzPWNvbnN1bWVyc2VjcmV0Jng9NmQ-";
+      // eslint-disable-next-line no-undef
+      const appid = process.env.REACT_APP_YAHOO_APPID;
       const lowestPrice = "0";
       const highestPrice = "100000";
       const itemName = "イヤホン";
