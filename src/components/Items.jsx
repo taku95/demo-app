@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, Typography } from "@material-ui/core";
 
 const Items = () => {
   const [items, setItems] = useState([]);
@@ -15,6 +16,7 @@ const Items = () => {
       try {
         const response = await fetch(url);
         const data = await response.json();
+        console.log(data);
         setItems(data.hits);
       } catch (error) {
         console.log(error);
@@ -30,13 +32,13 @@ const Items = () => {
       <ul>
         {items.map((item) => (
           <li key={item.code}>
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <p>{item.price}円</p>
-            <p>JANコード: {item.janCode}</p>
-            <a href={item.url} target="_blank" rel="noopener noreferrer">
+            <Typography variant="h5">{item.name}</Typography>
+            <Typography variant="body1">{item.description}</Typography>
+            <Typography variant="body1">{item.price}円</Typography>
+            <Typography variant="body1">JANコード: {item.janCode}</Typography>
+            <Link href={item.url} target="_blank" rel="noopener noreferrer">
               商品ページを開く
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
