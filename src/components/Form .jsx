@@ -69,7 +69,7 @@ export const Form = () => {
                   {...field}
                   label="Name"
                   error={!!errors.name}
-                  helperText={errors.name && errors.name.message}
+                  helperText={errors.name?.message}
                   fullWidth
                 />
               )}
@@ -87,7 +87,7 @@ export const Form = () => {
                   {...field}
                   label="Email"
                   error={!!errors.email}
-                  helperText={errors.email && errors.email.message}
+                  helperText={errors.email?.message}
                   fullWidth
                 />
               )}
@@ -102,7 +102,7 @@ export const Form = () => {
                   {...field}
                   label="Phone Number"
                   error={!!errors.phone}
-                  helperText={errors.phone && errors.phone.message}
+                  helperText={errors.phone?.message}
                   fullWidth
                 />
               )}
