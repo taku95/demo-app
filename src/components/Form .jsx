@@ -65,6 +65,7 @@ export const Form = () => {
               label="名前"
               error={!!errors.name}
               helperText={errors.name?.message}
+              required
               fullWidth
             />
           </Grid>
@@ -74,6 +75,7 @@ export const Form = () => {
               label="Email"
               error={!!errors.email}
               helperText={errors.email?.message}
+              required
               fullWidth
             />
           </Grid>
