@@ -60,52 +60,31 @@ export const Form = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Controller
-              control={control}
-              name="name"
-              rules={{ required: true }}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Name"
-                  error={!!errors.name}
-                  helperText={errors.name?.message}
-                  fullWidth
-                />
-              )}
+            <TextField
+              {...register("name")}
+              label="名前"
+              error={!!errors.name}
+              helperText={errors.name?.message}
+              fullWidth
             />
           </Grid>
           <Grid item xs={12}>
-            <Controller
-              control={control}
-              name="email"
-              rules={{
-                required: true,
-              }}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Email"
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                  fullWidth
-                />
-              )}
+            <TextField
+              {...register("email")}
+              label="Email"
+              error={!!errors.email}
+              helperText={errors.email?.message}
+              fullWidth
             />
           </Grid>
           <Grid item xs={12}>
-            <Controller
-              control={control}
-              name="phone"
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Phone Number"
-                  error={!!errors.phone}
-                  helperText={errors.phone?.message}
-                  fullWidth
-                />
-              )}
+            <TextField
+              {...register("phone")}
+              label="Phone Number"
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
+              required
+              fullWidth
             />
           </Grid>
 
