@@ -3,7 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  Grid,
   TextField,
   Button,
   FormControlLabel,
@@ -12,7 +11,9 @@ import {
   Checkbox,
   Box,
   Typography,
+  Grid,
 } from "@material-ui/core";
+import { Stack } from "@mui/material";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -55,11 +56,11 @@ export const Form = () => {
   };
 
   return (
-    <Box>
+    <Box width="50%" margin="auto">
       <Typography variant="h6">ReactHookForm超入門</Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+        <Stack spacing={2}>
+          <Box>
             <TextField
               {...register("name")}
               label="名前"
@@ -68,8 +69,8 @@ export const Form = () => {
               required
               fullWidth
             />
-          </Grid>
-          <Grid item xs={12}>
+          </Box>
+          <Box>
             <TextField
               {...register("email")}
               label="Email"
@@ -78,8 +79,8 @@ export const Form = () => {
               required
               fullWidth
             />
-          </Grid>
-          <Grid item xs={12}>
+          </Box>
+          <Box>
             <TextField
               {...register("phone")}
               label="Phone Number"
@@ -88,9 +89,9 @@ export const Form = () => {
               required
               fullWidth
             />
-          </Grid>
+          </Box>
 
-          <Grid item xs={12}>
+          <Box>
             <FormControl error={!!errors.selectedOptions}>
               <FormControlLabel
                 control={
@@ -118,19 +119,20 @@ export const Form = () => {
                 </FormHelperText>
               )}
             </FormControl>
-          </Grid>
-
-          <Grid item xs={12}>
+          </Box>
+          <Box>
             <Button
               type="submit"
               variant="contained"
               color="primary"
+              size="small"
               onClick={handleSubmit(onSubmit)}
+              fullWidth
             >
               検索
             </Button>
-          </Grid>
-        </Grid>
+          </Box>
+        </Stack>
       </form>
     </Box>
   );
