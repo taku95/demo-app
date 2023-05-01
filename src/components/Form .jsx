@@ -128,11 +128,13 @@ export const Form = () => {
                 />
               )}
             />
-            {errors.selectValid && (
-              <Typography variant="caption" color="error">
-                {errors.selectValid.message}
-              </Typography>
-            )}
+            <Box>
+              {errors.selectValid && (
+                <Typography variant="caption" color="error">
+                  {errors.selectValid.message}
+                </Typography>
+              )}
+            </Box>
           </Box>
           <Box>
             <Button
