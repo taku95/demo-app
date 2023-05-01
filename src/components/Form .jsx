@@ -6,12 +6,9 @@ import {
   TextField,
   Button,
   FormControlLabel,
-  FormControl,
-  FormHelperText,
   Checkbox,
   Box,
   Typography,
-  Grid,
 } from "@material-ui/core";
 import { Stack } from "@mui/material";
 import * as yup from "yup";
@@ -29,9 +26,6 @@ const schema = yup.object().shape({
       "正しい電話番号を入力してください (例：080-1237-2124)"
     )
     .required("電話番号は必須です"),
-  selectedOptions: yup
-    .array()
-    .min(1, "法人または個人どちらかを選択してください。"),
 });
 
 export const Form = () => {
@@ -40,6 +34,7 @@ export const Form = () => {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -49,10 +44,15 @@ export const Form = () => {
       phone: "080-1237-2124",
     },
   });
-
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    if (!data.isCorporate && !data.isIndividual) {
+      setError("selectValid", {
+        type: "manual",
+        message: "ステータスのいずれかにチェックをつけてください。",
+      });
+    } else {
+      console.log(data);
+    }
   };
 
   return (
@@ -92,33 +92,47 @@ export const Form = () => {
           </Box>
 
           <Box>
-            <FormControl error={!!errors.selectedOptions}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    {...register("selectedOptions")}
-                    value="isCorporate"
-                    defaultChecked
-                  />
-                }
-                label="法人"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    {...register("selectedOptions")}
-                    value="isIndividual"
-                    defaultChecked
-                  />
-                }
-                label="個人"
-              />
-              {errors.selectedOptions && (
-                <FormHelperText>
-                  {errors.selectedOptions.message}
-                </FormHelperText>
+            <Controller
+              name="isCorporate"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...field}
+                      color="primary"
+                      checked={field.value}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                  }
+                  label="法人"
+                />
               )}
-            </FormControl>
+            />
+            <Controller
+              name="isIndividual"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...field}
+                      color="primary"
+                      checked={field.value}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                  }
+                  label="個人"
+                />
+              )}
+            />
+            {errors.selectValid && (
+              <Typography variant="caption" color="error">
+                {errors.selectValid.message}
+              </Typography>
+            )}
           </Box>
           <Box>
             <Button
@@ -126,7 +140,6 @@ export const Form = () => {
               variant="contained"
               color="primary"
               size="small"
-              onClick={handleSubmit(onSubmit)}
               fullWidth
             >
               検索
