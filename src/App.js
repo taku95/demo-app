@@ -4,7 +4,7 @@ import Items from "./components/Items";
 import Box from "@mui/material/Box";
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [searchResult, setSearchResult] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,12 +12,12 @@ function App() {
       const lowestPrice = "0";
       const highestPrice = "100000";
       const itemName = "プロテイン"; // ここで初期値を指定する
-      const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=${appid}&price_from=${lowestPrice}&price_to=${highestPrice}&query=${itemName}&genre_category_id=48947&image_size=76&results=1000`;
+      const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=${appid}&price_from=${lowestPrice}&price_to=${highestPrice}&query=${itemName}&genre_category_id=48947&image_size=76&results=10`;
       try {
         const response = await fetch(url);
         const data = await response.json();
-        setItems(data.hits);
-        console.log(data.hits);
+        setSearchResult(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -29,13 +29,12 @@ function App() {
     <div className="App">
       <Box sx={{ paddingTop: "2rem" }}>
         <Box display="flex" justifyContent="center" sx={{ width: "100%" }}>
-          <Header setItems={setItems} />
+          <Header setSearchResult={setSearchResult} />
         </Box>
         <Box display="flex" justifyContent="center">
-          <Items items={items} />
+          <Items searchResult={searchResult} />
         </Box>
       </Box>
-      <div />
     </div>
   );
 }
