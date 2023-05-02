@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from "react";
 import { Link, Typography } from "@material-ui/core";
@@ -5,7 +6,9 @@ import Box from "@mui/material/Box";
 
 const Item = ({ item }) => {
   const removeLineBreaks = (description) => {
-    return description.replace(/<br>/g, "");
+    if (description) {
+      return description.replace(/<br>/g, "");
+    }
   };
   return (
     <Box>

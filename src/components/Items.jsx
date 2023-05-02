@@ -7,10 +7,9 @@ import Item from "./Item";
 import Box from "@mui/material/Box";
 
 const Items = ({ searchResult }) => {
-  const items = searchResult.hits;
-  console.log(searchResult);
+  const items = searchResult.hits ?? [];
+  // console.log(items);
   return (
-    // <div></div>
     <Box sx={{ width: "60%" }}>
       <Stack direction="column" spacing={2}>
         {items.map((item) => (
