@@ -1,48 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Link, Typography } from "@material-ui/core";
+/* eslint-disable react/prop-types */
+import React from "react";
+// import { Link, Typography } from "@material-ui/core";
+import { Stack } from "@mui/material";
+import Item from "./Item";
+import Box from "@mui/material/Box";
 
-const Items = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // eslint-disable-next-line no-undef
-      const appid = process.env.REACT_APP_YAHOO_APPID;
-      const lowestPrice = "0";
-      const highestPrice = "100000";
-      const itemName = "イヤホン";
-      const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=${appid}&price_from=${lowestPrice}&price_to=${highestPrice}&query=${itemName}&results=100`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        setItems(data.hits);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+const Items = ({ items }) => {
   return (
-    <div>
-      <h1>Yahoo!ショッピングの商品検索結果</h1>
-      <ul>
+    <Box sx={{ width: "60%" }}>
+      <h1></h1>
+      <Stack direction="column" spacing={2}>
         {items.map((item) => (
-          <li key={item.code}>
-            <Typography variant="h5">{item.name}</Typography>
-            <Typography variant="body1">{item.description}</Typography>
-            <Typography variant="body1">{item.price}円</Typography>
-            <Typography variant="body1">JANコード: {item.janCode}</Typography>
-            <Link href={item.url} target="_blank" rel="noopener noreferrer">
-              商品ページを開く
-            </Link>
-          </li>
+          <Item key={item.code} item={item}></Item>
         ))}
-      </ul>
-    </div>
+      </Stack>
+    </Box>
   );
 };
 
