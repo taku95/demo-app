@@ -12,11 +12,12 @@ function App() {
       const lowestPrice = "0";
       const highestPrice = "100000";
       const itemName = "プロテイン"; // ここで初期値を指定する
-      const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=${appid}&price_from=${lowestPrice}&price_to=${highestPrice}&query=${itemName}&results=100`;
+      const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=${appid}&price_from=${lowestPrice}&price_to=${highestPrice}&query=${itemName}&genre_category_id=48947&image_size=76&results=1000`;
       try {
         const response = await fetch(url);
         const data = await response.json();
         setItems(data.hits);
+        console.log(data.hits);
       } catch (error) {
         console.log(error);
       }
