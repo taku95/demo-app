@@ -1,8 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Link, Typography } from "@material-ui/core";
-import Box from "@mui/material/Box";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardHeader,
+  Box,
+} from "@material-ui/core";
 
 const Item = ({ item }) => {
   const removeLineBreaks = (description) => {
@@ -10,18 +17,25 @@ const Item = ({ item }) => {
       return description.replace(/<br>/g, "");
     }
   };
+
   return (
-    <Box>
-      <Link href={item.url} target="_blank" rel="noopener noreferrer">
-        <Typography variant="h6">{item.name}</Typography>
-      </Link>
-      <img src={item.image.small} alt={item.name} />
-      <Typography variant="body1">
-        {removeLineBreaks(item.description)}
-      </Typography>
-      <Typography variant="body1">{item.price}円</Typography>
-      {/* <Typography variant="body1">JANコード: {item.janCode}</Typography> */}
-    </Box>
+    <Card>
+      <CardActionArea>
+        <CardHeader title={item.name} />
+        <Box sx={{ height: 300, width: 300 }}>
+          <CardMedia component="img" image={item.exImage.url} alt={item.name} />
+        </Box>
+
+        <CardContent>
+          {/* <Typography variant="body1" color="textSecondary" component="div">
+            {removeLineBreaks(item.description)}
+          </Typography> */}
+          <Typography variant="h6" color="textSecondary" component="div">
+            {item.price}円
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
