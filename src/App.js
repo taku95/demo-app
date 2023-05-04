@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
@@ -25,7 +26,7 @@ function App() {
       }
     };
     fetchData();
-  }, []); // 空の配列を渡すことで初回のみ実行される
+  }, []);
 
   return (
     <div className="App">
