@@ -26,7 +26,6 @@ const ItemDetailPopup = ({ item, open, anchorEl }) => {
       <Box sx={{ padding: 20 }}>
         <Typography>{item.name}</Typography>
         <Typography>{removeLineBreaks(item.description)}</Typography>
-        <Typography>{item.price}円</Typography>
       </Box>
     </Popover>
   );
