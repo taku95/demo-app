@@ -35,12 +35,7 @@ const Item = ({ item }) => {
       onClick={handleCardClick}
     >
       <CardActionArea sx={{ flexGrow: 1 }}>
-        <CardMedia
-          component="img"
-          image={item.exImage.url}
-          alt={item.name}
-          sx={{ height: 200, objectFit: "contain" }}
-        />
+        <CardMedia component="img" image={item.exImage.url} alt={item.name} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {item.name}

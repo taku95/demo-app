@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
-import { Stack, Grid, Button } from "@mui/material";
+import { Stack, Grid, Button, Typography } from "@mui/material";
 import MuiPagination from "@material-ui/lab/Pagination";
 import { List as ListIcon } from "@mui/icons-material";
 import { GridOn as GridOnIcon } from "@mui/icons-material";
@@ -15,10 +15,21 @@ const Items = ({ searchResult }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [displayMode, setDisplayMode] = useState("list");
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const [sortOrder, setSortOrder] = useState("ascending");
 
   const handleDisplayModeChange = (mode) => {
     setDisplayMode(mode);
   };
+
+  const handleSortOrderChange = () => {
+    setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
+  };
+
+  if (sortOrder === "ascending") {
+    items.sort((a, b) => a.price - b.price);
+  } else if (sortOrder === "descending") {
+    items.sort((a, b) => b.price - a.price);
+  }
 
   const ITEMS_PER_PAGE = 20;
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
@@ -29,6 +40,8 @@ const Items = ({ searchResult }) => {
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
   };
+
+  console.log(searchResult.totalResultsAvailable);
   return (
     <Box
       sx={{
@@ -39,6 +52,10 @@ const Items = ({ searchResult }) => {
         flexDirection: "column",
       }}
     >
+      <Typography variant="h6" component="div" sx={{ marginBottom: "1rem" }}>
+        {searchResult.totalResultsAvailable}件の検索結果
+      </Typography>
+
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         <Button
           onClick={() => handleDisplayModeChange("list")}
@@ -48,8 +65,10 @@ const Items = ({ searchResult }) => {
           onClick={() => handleDisplayModeChange("grid")}
           startIcon={<GridOnIcon />}
         ></Button>
+        <Button onClick={handleSortOrderChange}>
+          {sortOrder === "ascending" ? "価格の昇順" : "価格の降順"}
+        </Button>
       </Box>
-
       <Box sx={{ width: isMobile ? "100%" : "auto" }}>
         <MuiPagination
           count={totalPages}
@@ -58,7 +77,6 @@ const Items = ({ searchResult }) => {
           size={isMobile ? "small" : "medium"}
         />
       </Box>
-
       {displayMode === "list" ? (
         <Stack direction="column" spacing={2}>
           {displayedItems.map((item) => (
